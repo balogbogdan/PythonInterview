@@ -1,0 +1,59 @@
+
+''' #Files
+
+#open a file
+fhand = open('mbox.txt')
+print fhand (returns a file handler, not the text itself)
+
+
+#reading a file(for loop to count the lines)
+fhand = open('mbox-short.txt')
+count = 0
+for line in fhand:
+    count = count + 1
+print('Line Count:', count)
+
+
+#reading the whole file
+add to the above code
+inp = fhand.read()
+print(len(inp))
+print(inp)
+
+
+#searching through a file
+fhand = open('mbox-short.txt')
+count = 0
+for line in fhand:
+    if line.startswith('From:'):
+        print(line)
+
+
+#or use the rstrip which strips whitespaces from the right side of a string
+fhand = open('mbox-short.txt')
+for line in fhand:
+    line = line.rstrip()
+    if line.startswith('From:'):
+print(line)
+
+
+#letting the user choose the file name, using try and except
+fname = input('Enter the file name: ')
+try:
+    fhand = open(fname)
+except:
+    print('File cannot be opened:', fname)
+    exit()
+count = 0
+for line in fhand:
+    if line.startswith('Subject:'):
+        count = count + 1
+print('There were', count, 'subject lines in', fname)
+
+
+#writing files
+fout = open('output.txt', 'w')
+print(fout)
+fout.close()
+
+'''
