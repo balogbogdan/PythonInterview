@@ -1,0 +1,164 @@
+'''
+#List operations:
+
+-the + operator concatenates lists
+
+-the * operator repeats a list a given number of times
+>>> [1, 2, 3] * 3
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+
+
+#List slices
+>>> t = ['a', 'b', 'c', 'd', 'e', 'f']
+>>> t[1:3]
+['b', 'c']
+-If you omit the first index, the slice starts at the beginning. If you omit the second,
+the slice goes to the end. So if you omit both, the slice is a copy of the whole list.
+
+
+A slice operator on the left side of an assignment can update multiple elements:
+>>> t = ['a', 'b', 'c', 'd', 'e', 'f']
+>>> t[1:3] = ['x', 'y']
+>>> print(t)
+['a', 'x', 'y', 'd', 'e', 'f']
+
+
+#List methods
+
+-extend takes a list as an argument and appends all of the elements:
+>>> t1 = ['a', 'b', 'c']
+>>> t2 = ['d', 'e']
+>>> t1.extend(t2)
+>>> print(t1)
+['a', 'b', 'c', 'd', 'e']
+
+-append, extend, sort(low to high)
+-deleting elements:
+*you can use .pop() if you know the index of the element. pop method returns the element that was removed
+*del t[1] if you don't need the removed value
+* t.remove("b")
+
+-To remove more than one element, you can use del with a slice index:
+>>> t = ['a', 'b', 'c', 'd', 'e', 'f']
+>>> del t[1:5]
+
+
+-To convert from a string to a list of
+characters, you can use list:
+>>> s = 'spam'
+>>> t = list(s)
+>>> print(t)
+['s', 'p', 'a', 'm']
+
+- split() method splits the string into a list of words
+
+
+- using the delimeter corespunzator
+
+join is the inverse of split. It takes a list of strings and concatenates the elements.
+join is a string method, so you have to invoke it on the delimiter and pass the list
+as a parameter:
+
+>>> t = ['pining', 'for', 'the', 'fjords']
+>>> delimiter = ' '
+>>> delimiter.join(t)
+'pining for the fjords'
+
+
+#parsing lines
+
+fhand = open('mbox-short.txt')
+for line in fhand:
+    line = line.rstrip()
+    if not line.startswith('From '): continue
+    words = line.split()
+    print(words[2])
+
+
+#objects and values:
+
+>>> a = 'banana'
+>>> b = 'banana'
+>>> a is b
+True
+
+
+>>> a = [1, 2, 3]
+>>> b = [1, 2, 3]
+>>> a is b
+False
+
+In this case we would say that the two lists are equivalent, because they have the
+same elements, but not identical, because they are not the same object. If two
+objects are identical, they are also equivalent, but if they are equivalent, they are
+not necessarily identical.
+
+
+
+#Aliasing
+If a refers to an object and you assign b = a, then both variables refer to the same
+object:
+
+>>> a = [1, 2, 3]
+>>> b = a
+>>> b is a
+True
+
+The association of a variable with an object is called a reference. In this example,
+there are two references to the same object.
+An object with more than one reference has more than one name, so we say that
+the object is aliased.
+
+If the aliased object is mutable, changes made with one alias affect the other:
+>>> b[0] = 17
+>>> print(a)
+[17, 2, 3]
+
+Although this behavior can be useful, it is error-prone. In general, it is safer to
+avoid aliasing when you are working with mutable objects.
+For immutable objects like strings, aliasing is not as much of a problem. In this
+example:
+a = 'banana'
+b = 'banana'
+
+it almost never makes a difference whether a and b refer to the same string or not.
+
+#list arguments
+
+When you pass a list to a function, the function gets a reference to the list. If
+the function modifies a list parameter, the caller sees the change. For example,
+delete_head removes the first element from a list:
+
+def delete_head(t):
+    del t[0]
+
+Here’s how it is used:
+
+>>> letters = ['a', 'b', 'c']
+>>> delete_head(letters)
+>>> print(letters)
+['b', 'c']
+
+
+The parameter t and the variable letters are aliases for the same object.
+It is important to distinguish between operations that modify lists and operations
+that create new lists. For example, the append method modifies a list, but the +
+operator creates a new list:
+
+>>> t1 = [1, 2]
+>>> t2 = t1.append(3)
+>>> print(t1)
+[1, 2, 3]
+>>> print(t2)
+None
+
+
+>>> t3 = t1 + [3]
+>>> print(t3)
+[1, 2, 3]
+>>> t2 is t3
+False
+
+
+
+'''END
